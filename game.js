@@ -7,6 +7,8 @@
     const left = document.querySelector("#left");
     const spanLives = document.querySelector("#lives");
     const spanTime = document.querySelector("#time");
+    const pResult = document.querySelector("#result");
+    const spanRecord = document.querySelector("#record");
     
     let canvasSize;
     let elementsSize;
@@ -71,6 +73,7 @@
         if (!timeStart) {
             timeStart = Date.now();
             timeInterval = setInterval(showTime,100);
+            showRecord ();
         }
       
 
@@ -225,12 +228,14 @@
         if (recordTime) {
             if (recordTime >= playerTime) {
                 localStorage.setItem("record_time", playerTime);
-                console.log("superaste el record");
+               pResult.innerHTML = "superaste el record";
             } else {
-                console.log("no superaste el recod, Pete");
+               pResult.innerHTML = "no superaste el record, Pete";
             }
         } else {
             localStorage.setItem("record_time", playerTime);
+            pResult.innerHTML = "superaste el record";
+            
         }
         console.log({recordTime, playerTime});
     }
@@ -260,6 +265,11 @@
     function showTime () {
         
         spanTime.innerHTML = Date.now() - timeStart;
+        
+    }
+    function showRecord () {
+        
+        spanRecord.innerHTML = localStorage.getItem("record_time");
         
     }
 
