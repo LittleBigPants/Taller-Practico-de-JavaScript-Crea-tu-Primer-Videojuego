@@ -9,6 +9,49 @@
     const spanTime = document.querySelector("#time");
     const pResult = document.querySelector("#result");
     const spanRecord = document.querySelector("#record");
+    const reset = document.querySelector("#reset");
+    
+    const buttons = document.querySelector(".btns");
+    const messages = document.querySelector(".messages");
+
+    const volume = document.querySelector("#volume");
+    const audio = document.querySelector("#audio");
+    
+    const titulo = document.querySelector("#titulo");
+    const iniciar = document.querySelector("#iniciar");
+
+   
+
+    buttons.style.display = "none";
+    messages.style.display = "none";
+    canvas.style.display = "none";
+    
+    volume.addEventListener("click", () => {
+        if(audio.muted == false){
+            volume.innerHTML="🔈"
+            audio.muted = true;
+        } else if (audio.muted == true){
+            audio.muted = false;
+            volume.innerHTML="🔊"
+        }
+    })
+
+    iniciar.addEventListener("click", iniciarJuego)
+
+    function iniciarJuego () {
+        buttons.style.display = "flex";
+        messages.style.display = "flex";
+        canvas.style.display = "flex";
+        titulo.style.display = "none";
+        if (!timeStart) {
+            timeStart = Date.now();
+            timeInterval = setInterval(showTime,100);
+            showRecord ();
+        }
+    }
+    
+    
+    reset.style.display = "none";
     
     let canvasSize;
     let elementsSize;
@@ -36,7 +79,7 @@
     
     window.addEventListener("load", setCanvasSize);
     window.addEventListener("resize", setCanvasSize); 
-    
+
     function setCanvasSize() { 
 
         
@@ -52,8 +95,11 @@
         canvas.setAttribute("height",  canvasSize);
 
 
+        
+        
         elementsSize = (canvasSize / 10) - 1.20;
-
+        playerPosition.x = undefined;
+        playerPosition.y = undefined;
         startGame();
     }
 
@@ -70,11 +116,7 @@
             gameWin();
             return;
         }
-        if (!timeStart) {
-            timeStart = Date.now();
-            timeInterval = setInterval(showTime,100);
-            showRecord ();
-        }
+
       
 
         const mapRows =   map.trim().split("\n");
@@ -120,10 +162,11 @@
     down.addEventListener("click", moveDown);
     right.addEventListener("click", moveRight);
     left.addEventListener("click", moveLeft);
+    reset.addEventListener("click", reiniciar);
     
     function moveUp () {
         
-        if ((playerPosition.y - elementsSize) < elementsSize){
+        if ((playerPosition.y - elementsSize) < elementsSize - 10){
             console.warn("error")
             
         } else {
@@ -155,7 +198,7 @@
     
     function moveLeft () {
         
-        if ((playerPosition.x + elementsSize) < elementsSize){
+        if ((playerPosition.x + elementsSize) <= elementsSize){
             console.warn("error")
         } else { 
             playerPosition.x -= elementsSize;
@@ -228,9 +271,9 @@
         if (recordTime) {
             if (recordTime >= playerTime) {
                 localStorage.setItem("record_time", playerTime);
-               pResult.innerHTML = "superaste el record";
+               pResult.innerHTML = "Felicidades, superaste el record 🏆";
             } else {
-               pResult.innerHTML = "no superaste el record, Pete";
+               pResult.innerHTML = "No superaste el record 💀";
             }
         } else {
             localStorage.setItem("record_time", playerTime);
@@ -238,6 +281,13 @@
             
         }
         console.log({recordTime, playerTime});
+        
+        
+        reset.style.display = "flex";
+        buttons.style.display = "none";
+        messages.style.display = "none";
+        canvas.style.display = "none";
+        
     }
     
     function colision () {
@@ -263,9 +313,18 @@
     }
 
     function showTime () {
+        const msToSec = (Date.now() - timeStart) / 1000;
+        const milliseconds = (String(msToSec - Math.floor(msToSec)).split('.')[1]).substring(0,2);
         
-        spanTime.innerHTML = Date.now() - timeStart;
-        
+        const milliInterval = Date.now() - timeStart;
+        let seconds = Math.floor(milliInterval / 1000);
+        let minutes = Math.floor(seconds / 60);
+    
+        seconds = (seconds % 60) < 10 ? `0${seconds % 60}` : seconds % 60;
+        minutes = (minutes % 60) < 10 ? `0${minutes % 60}` : minutes % 60;
+    
+    
+        spanTime.innerHTML = `${minutes}:${seconds}:${milliseconds}`;
     }
     function showRecord () {
         
@@ -273,3 +332,6 @@
         
     }
 
+    function reiniciar () {
+        location.reload();
+    }

@@ -8,25 +8,51 @@
     <title>Platzriv - Juego online</title>
 </head>
 <body>
+    <audio autoplay loop id="audio" >
+        <source src="audio/Bonnie's Lullaby (slowed down + 8D) for 10 minutes..mp3">
+    </audio>
+    
+    <div>
+    <button id="volume" class="fa-solid">🔊</button>
+    </div>
+      
     <div class="game-container">
+        
+        <div id="titulo" class="fa-solid fa-beat">
+            <h1 id="primera">Pulsa el boton para empezar 👻</h1>
+            <button id="iniciar">Iniciar Juego</button>
+        </div>
+        
+        <div id="final" class="fa-solid fa-beat">
+            <P id="result"></P>
+        <button id="reset" >Start Again!</button>
+        </div>
+        
+        
         <canvas id="game" >
         </canvas>
         
-        <div class="btns">
-            <button id="up">Arriba</button>
-            <button id="left">Izquierda</button>
-            <button id="right">Derecha</button>
-            <button id="down">Abajo</button>
+        <div class="btns" >
+            <button id="up" >🢁</button>
+            <button id="left">🢀</button>
+            <button id="right">🢂</button>
+            <button id="down">🢃</button>
         </div>
 
         <div class="messages">
-            <P>Vidas: <span id="lives"> </span></P>
-            <P>Tiempo: ⏳<span id="time"> </span></P>
-            <P>Record: 🏆<span id="record"> </span></P>
-            <P id="result"></P>
+            <P>Vidas: <span id="lives" class="fa-solid fa-beat"> </span></P>
+            <P>Tiempo: <i class="fa-solid fa-hourglass-start"></i><span id="time" > </span></P>
+            <P>Record: <i class="fa-solid fa-trophy"></i><span id="record"> </span></P>
         </div>
+
+       
+
+
     </div>
+
+<script src="https://kit.fontawesome.com/e52087df1e.js" crossorigin="anonymous"></script>
 </body>
+
 <script src="maps.js"></script>
 <script src="game.js"></script>
 </html>

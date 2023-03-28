@@ -1,5 +1,6 @@
 body {
-  background-color: indigo;
+  display: flex;
+  background-image: url(img/67110554-fdea5400-f20d-11e9-834a-d459a612b7b1.gif);
   color: #fff;  
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 0;
@@ -16,9 +17,9 @@ body {
 }
 
 canvas {
-  border: 4px solid #ff6600;
+  border: 4px solid blueviolet;
   border-radius: 8px;
-  background-color: #feff9d;
+  background-color: #42b883;
 }
 
 .btns {
@@ -30,16 +31,24 @@ canvas {
 }
 
 button {
+
   background-color: #fdef05;
-  border-radius: 8px;
+  
   border-color: #ff6600;
   font-family: inherit;
-  margin: 0;
-  padding: 5px 20px;
-  width: 100px;
+
+  
+  margin:  0;
+  
 }
-button:not(:last-child) {
-  margin-right: 10px;
+
+#volume {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+#volume:hover {
+  background-color: burlywood;
 }
 
 .messages {
@@ -54,6 +63,70 @@ p {
   display: block;
   margin: 0;
   width: 100%;
+}
+
+#up, #down { margin-left: 100%; margin-right: 100%; }
+
+/* segunda pantalla */
+
+#final {
+  display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+#reset {
+
+  display: flex;
+  margin-top: 20px;
+  width: 100px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#reset:hover {
+  background-color: burlywood;
+}
+
+#result {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.fa-trophy{
+  color: #fdef05;
+}
+
+/* titulo */
+
+#titulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#primera{
+
+}
+
+#iniciar{
+  display: flex;
+  margin-top: 20px;
+  width: 100px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+#iniciar:hover {
+  background-color: burlywood;
 }
 
 @media (max-width: 440px) {
